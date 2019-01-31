@@ -1,6 +1,7 @@
 import { UserManager } from 'oidc-client';
 import userManagerProvider from './tools/userManagerProvider';
 import environmentProvider from './tools/environmentProvider';
+import tokenProvider from './tools/tokenProvider';
 import User from './modules/user';
 import Tenant from './modules/tenant';
 import Client from './modules/client';
@@ -71,6 +72,7 @@ export default class BrowserSDK {
    */
   login({ loginHint } = {}) {
     return this.manager.getUser().then(user => {
+      tokenProvider.set(user.access_token);
       // ignore this code only on redirect from token issuer
       if (!user && window.location.pathname !== AUTH_CALLBACK_PATH) {
         this.manager.signinRedirect({ login_hint: loginHint });

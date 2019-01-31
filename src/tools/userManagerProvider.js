@@ -1,3 +1,4 @@
+import tokenProvider from './tokenProvider';
 /**
  * @private
  * Holds environment information
@@ -23,6 +24,7 @@ class UserManagerProvider {
    */
   clear() {
     this.userManager = undefined;
+    tokenProvider.clear();
   }
 }
 

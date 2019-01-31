@@ -1,4 +1,4 @@
-import userManagerProvider from './userManagerProvider';
+import tokenProvider from './tokenProvider';
 import environmentProvider from './environmentProvider';
 
 /**
@@ -10,10 +10,10 @@ import environmentProvider from './environmentProvider';
  * @returns {Promise}
  */
 async function call(path, method = 'GET', body = null) {
-  const user = await userManagerProvider.get().getUser();
+  const token = await tokenProvider.get();
   const { apiUri } = environmentProvider.get();
 
-  if (!user) {
+  if (!token) {
     throw Error('OLT Browser SDK: No authorized user found');
   }
 
@@ -21,7 +21,7 @@ async function call(path, method = 'GET', body = null) {
     method,
     body: body ? JSON.stringify(body) : undefined,
     headers: {
-      authorization: `Bearer ${user.access_token}`,
+      authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
   }).then(async response => {

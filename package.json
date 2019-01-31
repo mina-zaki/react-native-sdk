@@ -2,7 +2,7 @@
   "name": "lightelligence-javascript-sdk",
   "version": "0.1.0",
   "description": "javascript SDK for lightelligence platform",
-  "main": "dist/bundle.web.js",
+  "main": "src/index-react-native.js",
   "scripts": {
     "start": "webpack --config webpack.config.js --watch true",
     "test": "jest --coverage",
@@ -10,7 +10,7 @@
     "documentation": "documentation build src/** -f html -o docs --theme lightelligence_theme",
     "build": "rm -rf dist && webpack --config webpack.config.js",
     "license-report": "legally",
-    "precommit": "npm run lint && npm run test"
+    "precommit": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -51,7 +51,8 @@
   },
   "dependencies": {
     "oidc-client": "^1.5.2",
-    "postinstall-build": "^5.0.1"
+    "postinstall-build": "^5.0.1",
+    "react-native-app-auth": "^4.0.0"
   },
   "jest": {
     "setupFiles": [
