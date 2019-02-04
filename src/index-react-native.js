@@ -19,8 +19,9 @@ export { User, Tenant, Client, Device, DeviceType, Timeseries, Event, Certificat
  * @param {Object} options
  * @param {string} [options.environment] - lightelligence environment.
  * avalaible options: 'dev', 'int', 'preview', 'prod'
- * @param {array} [options.scope = ['openid', 'profile', 'email', 'offline_access']] - openid scope
+ * @param {array} [options.scope = ['openid', 'profile', 'email']] - openid scope
  * @param {string} options.clientId - registered app client id
+ * @param {string} options.redirectUrl - application redirect url
  */
 export default class ReactNativeSDK {
   constructor({
@@ -53,8 +54,6 @@ export default class ReactNativeSDK {
 
   /**
    * Redirects to login page if user is not logged in already
-   * @param {Object} [options]
-   * @param {string} [options.loginHint] - login_hint to forward email/username in keycloak.
    */
   async login() {
     const token = await authorize(this.config);

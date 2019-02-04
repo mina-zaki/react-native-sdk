@@ -2,7 +2,7 @@
   "name": "lightelligence-javascript-sdk",
   "version": "0.1.0",
   "description": "javascript SDK for lightelligence platform",
-  "main": "src/index-react-native.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "webpack --config webpack.config.js --watch true",
     "test": "jest --coverage",
