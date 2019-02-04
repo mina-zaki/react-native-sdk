@@ -72,9 +72,10 @@ export default class BrowserSDK {
    */
   login({ loginHint } = {}) {
     return this.manager.getUser().then(user => {
-      tokenProvider.set(user.access_token);
-      // ignore this code only on redirect from token issuer
-      if (!user && window.location.pathname !== AUTH_CALLBACK_PATH) {
+      if (user) {
+        tokenProvider.set(user.access_token);
+      } else if (window.location.pathname !== AUTH_CALLBACK_PATH) {
+        // ignore this code only on redirect from token issuer
         this.manager.signinRedirect({ login_hint: loginHint });
       }
     });
