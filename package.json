@@ -52,7 +52,8 @@
   "dependencies": {
     "oidc-client": "^1.5.2",
     "postinstall-build": "^5.0.1",
-    "react-native-app-auth": "^4.0.0"
+    "react-native-app-auth": "^4.0.0",
+    "url-search-params-polyfill": "^5.0.0"
   },
   "jest": {
     "setupFiles": [

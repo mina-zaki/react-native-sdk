@@ -57,7 +57,7 @@ export default class ReactNativeSDK {
    */
   async login() {
     const token = await authorize(this.config);
-    tokenProvider.set(token);
+    tokenProvider.set(token.accessToken);
     return token;
   }
 
