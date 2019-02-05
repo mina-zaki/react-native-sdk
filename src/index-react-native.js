@@ -1,17 +1,6 @@
-import { authorize } from 'react-native-app-auth';
+import { authorize, revoke } from 'react-native-app-auth';
 import tokenProvider from './tools/tokenProvider';
 import environmentProvider from './tools/environmentProvider';
-import User from './modules/user';
-import Tenant from './modules/tenant';
-import Client from './modules/client';
-import Device from './modules/device';
-import Timeseries from './modules/timeseries';
-import Event from './modules/event';
-import Certificate from './modules/certificate';
-import DeviceType from './modules/deviceType';
-import Consumption from './modules/consumption';
-
-export { User, Tenant, Client, Device, DeviceType, Timeseries, Event, Certificate, Consumption };
 
 /**
  * Main React Native sdk module
@@ -64,8 +53,10 @@ export default class ReactNativeSDK {
   /**
    * Logs user out
    */
-  // logout() {
-  //   tokenProvider.clear();
-  // }
+  async logout() {
+    const token = tokenProvider.get();
+    await revoke(this.config, token);
+    tokenProvider.clear();
+  }
 
 }
