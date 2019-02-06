@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack --config webpack.config.js --watch true",
-    "test": "jest --coverage",
+    "test": "npm run test-web && npm run test-react-native",
+    "test-web": "jest --coverage --config=./jest.config.js",
+    "test-react-native": "jest --coverage --config=./jest.react-native-config.js",
     "lint": "eslint src/** test/**",
     "documentation": "documentation build src/** -f html -o docs --theme lightelligence_theme",
     "build": "rm -rf dist && webpack --config webpack.config.js",
@@ -60,15 +62,5 @@
     "postinstall-build": "^5.0.1",
     "react-native-app-auth": "^4.0.0",
     "url-search-params-polyfill": "^5.0.0"
-  },
-  "jest": {
-    "setupFiles": [
-      "jest-localstorage-mock",
-      "./setupJest.js"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!(react-native-app-auth|react-native|react-native-implementation)/)"
-    ],
-    "preset": "react-native"
   }
 }
