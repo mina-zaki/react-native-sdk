@@ -1,36 +1,19 @@
 import ApiService from '../src/tools/apiService';
-import userManagerProvider from '../src/tools/userManagerProvider';
+import tokenProvider from '../src/tools/tokenProvider';
 import environmentProvider from '../src/tools/environmentProvider';
-
-const userMock = { access_token: 'abcdefg' };
 
 const defaultHeaders = { 'content-type': 'application/json' };
 describe('ApiService.call', () => {
   beforeEach(() => {
-    userManagerProvider.set({
-      getUser: jest.fn().mockResolvedValue(userMock)
-    });
-
+    tokenProvider.set('abcdefg');
     environmentProvider.set({
       apiUri: 'http://example.com'
     });
     fetch.resetMocks();
   });
 
-  it('resolves user object before executing a call', () => {
-    fetch.mockResponseOnce(JSON.stringify({ data: '12345' }), {
-      headers: defaultHeaders
-    });
-
-    return ApiService.call('/test-uri').then(() => {
-      expect(userManagerProvider.get().getUser.mock.calls.length).toEqual(1);
-    });
-  });
-
   it('throws error if no user is authorized', () => {
-    userManagerProvider.set({
-      getUser: jest.fn().mockResolvedValue(null)
-    });
+    tokenProvider.clear();
     fetch.mockResponseOnce(JSON.stringify({ data: '12345' }), {
       headers: defaultHeaders
     });

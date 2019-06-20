@@ -1,17 +1,7 @@
 import { UserManager } from 'oidc-client';
 import userManagerProvider from './tools/userManagerProvider';
 import environmentProvider from './tools/environmentProvider';
-import User from './modules/user';
-import Tenant from './modules/tenant';
-import Client from './modules/client';
-import Device from './modules/device';
-import Timeseries from './modules/timeseries';
-import Event from './modules/event';
-import Certificate from './modules/certificate';
-import DeviceType from './modules/deviceType';
-import Consumption from './modules/consumption';
-
-export { User, Tenant, Client, Device, DeviceType, Timeseries, Event, Certificate, Consumption };
+import tokenProvider from './tools/tokenProvider';
 
 const AUTH_CALLBACK_PATH = '/auth-callback';
 
@@ -71,8 +61,10 @@ export default class BrowserSDK {
    */
   login({ loginHint } = {}) {
     return this.manager.getUser().then(user => {
-      // ignore this code only on redirect from token issuer
-      if (!user && window.location.pathname !== AUTH_CALLBACK_PATH) {
+      if (user) {
+        tokenProvider.set(user.access_token);
+      } else if (window.location.pathname !== AUTH_CALLBACK_PATH) {
+        // ignore this code only on redirect from token issuer
         this.manager.signinRedirect({ login_hint: loginHint });
       }
     });
