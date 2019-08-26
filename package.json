@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/lightelligence/javascript-sdk.git"
+    "url": "git@github.com:lightelligence-io/browser-sdk.git"
   },
   "keywords": [
     "osram",
