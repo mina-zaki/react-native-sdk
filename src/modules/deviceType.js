@@ -1,5 +1,5 @@
+import {URLSearchParams} from 'whatwg-url';
 import ApiService from '../tools/apiService';
-import 'url-search-params-polyfill';
 
 /**
  * Methods for device type operations
