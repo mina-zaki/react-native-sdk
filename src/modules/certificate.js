@@ -1,5 +1,4 @@
 import ApiService from '../tools/apiService';
-import 'url-search-params-polyfill';
 
 /**
  * Methods for certificate operations
