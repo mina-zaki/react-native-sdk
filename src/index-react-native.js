@@ -29,6 +29,7 @@ export default class ReactNativeSDK {
       serviceConfiguration: {
         authorizationEndpoint: `https://id.${baseUrl}/v1/id/auth/realms/olt/protocol/openid-connect/auth`,
         tokenEndpoint: `https://id.${baseUrl}/v1/id/auth/realms/olt/protocol/openid-connect/token`,
+        revocationEndpoint: `https://id.${baseUrl}/v1/id/auth/realms/olt/protocol/openid-connect/logout`,
       },
       clientId,
       redirectUrl,
@@ -55,7 +56,7 @@ export default class ReactNativeSDK {
    */
   async logout() {
     const token = tokenProvider.get();
-    await revoke(this.config, token);
+    await revoke(this.config, {tokenToRevoke: token});
     tokenProvider.clear();
   }
 
